@@ -12,6 +12,7 @@
 		031F09DA1F87060F003099C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 031F09D81F87060F003099C1 /* Main.storyboard */; };
 		031F09DC1F87060F003099C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031F09DB1F87060F003099C1 /* Assets.xcassets */; };
 		031F09DF1F87060F003099C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 031F09DD1F87060F003099C1 /* LaunchScreen.storyboard */; };
+		A42E56A8C24FDF7ED6B55B4A /* Pods_CrazyWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB649E1E80A59AE9D3146CC /* Pods_CrazyWeather.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		031F09DB1F87060F003099C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		031F09DE1F87060F003099C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		031F09E01F870610003099C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9F2D33E23C774BD119F896E /* Pods-CrazyWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrazyWeather.release.xcconfig"; path = "Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather.release.xcconfig"; sourceTree = "<group>"; };
+		B7F5C826AF0E9B502023046C /* Pods-CrazyWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrazyWeather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather.debug.xcconfig"; sourceTree = "<group>"; };
+		EFB649E1E80A59AE9D3146CC /* Pods_CrazyWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CrazyWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A42E56A8C24FDF7ED6B55B4A /* Pods_CrazyWeather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				031F09D31F87060F003099C1 /* CrazyWeather */,
 				031F09D21F87060F003099C1 /* Products */,
+				B17A123569580F6C64B078FB /* Pods */,
+				1C85E5DA899705876E3C749C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = CrazyWeather;
 			sourceTree = "<group>";
 		};
+		1C85E5DA899705876E3C749C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EFB649E1E80A59AE9D3146CC /* Pods_CrazyWeather.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B17A123569580F6C64B078FB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B7F5C826AF0E9B502023046C /* Pods-CrazyWeather.debug.xcconfig */,
+				A9F2D33E23C774BD119F896E /* Pods-CrazyWeather.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 031F09E31F870610003099C1 /* Build configuration list for PBXNativeTarget "CrazyWeather" */;
 			buildPhases = (
+				4A00FF767D3AE017039AC171 /* [CP] Check Pods Manifest.lock */,
 				031F09CD1F87060F003099C1 /* Sources */,
 				031F09CE1F87060F003099C1 /* Frameworks */,
 				031F09CF1F87060F003099C1 /* Resources */,
+				6BF6BE8775B3287BF394B751 /* [CP] Embed Pods Frameworks */,
+				1950025E8DB75F3C583E73F1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,66 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1950025E8DB75F3C583E73F1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-resources.sh",
+				"$PODS_CONFIGURATION_BUILD_DIR/AerisWeather/Aeris.bundle",
+				"$PODS_CONFIGURATION_BUILD_DIR/AerisWeather/AerisUI.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4A00FF767D3AE017039AC171 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CrazyWeather-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6BF6BE8775B3287BF394B751 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/MBXMapKit/MBXMapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBXMapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		031F09CD1F87060F003099C1 /* Sources */ = {
@@ -272,6 +359,7 @@
 		};
 		031F09E41F870610003099C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7F5C826AF0E9B502023046C /* Pods-CrazyWeather.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +375,7 @@
 		};
 		031F09E51F870610003099C1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9F2D33E23C774BD119F896E /* Pods-CrazyWeather.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
