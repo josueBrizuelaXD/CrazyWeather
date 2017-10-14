@@ -8,21 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		031F09D51F87060F003099C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031F09D41F87060F003099C1 /* AppDelegate.swift */; };
-		031F09D71F87060F003099C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031F09D61F87060F003099C1 /* ViewController.swift */; };
+		031F09D71F87060F003099C1 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031F09D61F87060F003099C1 /* TabViewController.swift */; };
 		031F09DA1F87060F003099C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 031F09D81F87060F003099C1 /* Main.storyboard */; };
 		031F09DC1F87060F003099C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031F09DB1F87060F003099C1 /* Assets.xcassets */; };
 		031F09DF1F87060F003099C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 031F09DD1F87060F003099C1 /* LaunchScreen.storyboard */; };
+		0332B3101F8DCF7500146829 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332B30F1F8DCF7500146829 /* MapViewController.swift */; };
+		03A2C1E61F8EE1CD003875E7 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A2C1E51F8EE1CD003875E7 /* WeatherViewController.swift */; };
 		A42E56A8C24FDF7ED6B55B4A /* Pods_CrazyWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB649E1E80A59AE9D3146CC /* Pods_CrazyWeather.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		031F09D11F87060F003099C1 /* CrazyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrazyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		031F09D41F87060F003099C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		031F09D61F87060F003099C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		031F09D61F87060F003099C1 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		031F09D91F87060F003099C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		031F09DB1F87060F003099C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		031F09DE1F87060F003099C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		031F09E01F870610003099C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0332B30F1F8DCF7500146829 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		039335ED1F887B3D0083E962 /* CrazyWeather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrazyWeather-Bridging-Header.h"; sourceTree = "<group>"; };
+		03A2C1E51F8EE1CD003875E7 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		A9F2D33E23C774BD119F896E /* Pods-CrazyWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrazyWeather.release.xcconfig"; path = "Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather.release.xcconfig"; sourceTree = "<group>"; };
 		B7F5C826AF0E9B502023046C /* Pods-CrazyWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrazyWeather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		EFB649E1E80A59AE9D3146CC /* Pods_CrazyWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CrazyWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +48,7 @@
 		031F09C81F87060F003099C1 = {
 			isa = PBXGroup;
 			children = (
+				039335ED1F887B3D0083E962 /* CrazyWeather-Bridging-Header.h */,
 				031F09D31F87060F003099C1 /* CrazyWeather */,
 				031F09D21F87060F003099C1 /* Products */,
 				B17A123569580F6C64B078FB /* Pods */,
@@ -61,14 +67,24 @@
 		031F09D31F87060F003099C1 /* CrazyWeather */ = {
 			isa = PBXGroup;
 			children = (
+				0332B3111F8DCF7B00146829 /* Controllers */,
 				031F09D41F87060F003099C1 /* AppDelegate.swift */,
-				031F09D61F87060F003099C1 /* ViewController.swift */,
 				031F09D81F87060F003099C1 /* Main.storyboard */,
 				031F09DB1F87060F003099C1 /* Assets.xcassets */,
 				031F09DD1F87060F003099C1 /* LaunchScreen.storyboard */,
 				031F09E01F870610003099C1 /* Info.plist */,
 			);
 			path = CrazyWeather;
+			sourceTree = "<group>";
+		};
+		0332B3111F8DCF7B00146829 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				031F09D61F87060F003099C1 /* TabViewController.swift */,
+				0332B30F1F8DCF7500146829 /* MapViewController.swift */,
+				03A2C1E51F8EE1CD003875E7 /* WeatherViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		1C85E5DA899705876E3C749C /* Frameworks */ = {
@@ -123,6 +139,7 @@
 				TargetAttributes = {
 					031F09D01F87060F003099C1 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -166,8 +183,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/AerisWeather/Aeris.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/AerisWeather/AerisUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/AerisWeather/Aeris.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/AerisWeather/AerisUI.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -223,7 +240,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				031F09D71F87060F003099C1 /* ViewController.swift in Sources */,
+				031F09D71F87060F003099C1 /* TabViewController.swift in Sources */,
+				03A2C1E61F8EE1CD003875E7 /* WeatherViewController.swift in Sources */,
+				0332B3101F8DCF7500146829 /* MapViewController.swift in Sources */,
 				031F09D51F87060F003099C1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,12 +381,15 @@
 			baseConfigurationReference = B7F5C826AF0E9B502023046C /* Pods-CrazyWeather.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LY5RWPR92L;
 				INFOPLIST_FILE = CrazyWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = josuebrizuelaxp.CrazyWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CrazyWeather-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -378,12 +400,14 @@
 			baseConfigurationReference = A9F2D33E23C774BD119F896E /* Pods-CrazyWeather.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LY5RWPR92L;
 				INFOPLIST_FILE = CrazyWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = josuebrizuelaxp.CrazyWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CrazyWeather-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

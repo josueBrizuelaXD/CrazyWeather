@@ -6,7 +6,5 @@ target 'CrazyWeather' do
   use_frameworks!
 
   # Pods for CrazyWeather
-    pod 'AerisWeather'
-    pod 'AerisWeather/AerisMap'
-    pod 'AerisWeather/AerisMapboxMap'
+    
 end

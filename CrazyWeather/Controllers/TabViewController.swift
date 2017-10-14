@@ -8,13 +8,24 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TabViewController: UITabBarController {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
 
 
+    
 }
+
+
+
 
