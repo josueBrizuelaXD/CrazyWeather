@@ -9,7 +9,14 @@
 import UIKit
 
 class WeatherViewController: UIViewController {
-let apiKey = "082e6533e8dc5235d377971b22a93ce5"
+    
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var summaryWeatherLabel: UILabel!
+    @IBOutlet weak var tempLabel: UILabel!
+    
+    
+    
+    let apiKey = "082e6533e8dc5235d377971b22a93ce5"
     let apiURL = "http://api.openweathermap.org/data/2.5/weather?zip=77547&appid=082e6533e8dc5235d377971b22a93ce5"
     let defaultSession = URLSession(configuration: .default)
     var dataTask: URLSessionDataTask?
@@ -59,14 +66,5 @@ getWeatherResultsFor(zipcode: "77547")
             print("json: \(jsonDict)")
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

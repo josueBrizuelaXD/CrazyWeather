@@ -13,7 +13,10 @@
 		031F09DC1F87060F003099C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031F09DB1F87060F003099C1 /* Assets.xcassets */; };
 		031F09DF1F87060F003099C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 031F09DD1F87060F003099C1 /* LaunchScreen.storyboard */; };
 		0332B3101F8DCF7500146829 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0332B30F1F8DCF7500146829 /* MapViewController.swift */; };
+		034F233C1F9AD546003B0401 /* DayFrameForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034F233B1F9AD546003B0401 /* DayFrameForecast.swift */; };
+		034F233F1F9AD848003B0401 /* DayFrameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034F233E1F9AD848003B0401 /* DayFrameCollectionViewCell.swift */; };
 		03A2C1E61F8EE1CD003875E7 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A2C1E51F8EE1CD003875E7 /* WeatherViewController.swift */; };
+		03FABD2B1F958DCD008C226E /* ForecastCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FABD2A1F958DCD008C226E /* ForecastCollectionViewController.swift */; };
 		A42E56A8C24FDF7ED6B55B4A /* Pods_CrazyWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB649E1E80A59AE9D3146CC /* Pods_CrazyWeather.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,8 +29,11 @@
 		031F09DE1F87060F003099C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		031F09E01F870610003099C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0332B30F1F8DCF7500146829 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		034F233B1F9AD546003B0401 /* DayFrameForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFrameForecast.swift; sourceTree = "<group>"; };
+		034F233E1F9AD848003B0401 /* DayFrameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFrameCollectionViewCell.swift; sourceTree = "<group>"; };
 		039335ED1F887B3D0083E962 /* CrazyWeather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrazyWeather-Bridging-Header.h"; sourceTree = "<group>"; };
 		03A2C1E51F8EE1CD003875E7 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		03FABD2A1F958DCD008C226E /* ForecastCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCollectionViewController.swift; sourceTree = "<group>"; };
 		A9F2D33E23C774BD119F896E /* Pods-CrazyWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrazyWeather.release.xcconfig"; path = "Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather.release.xcconfig"; sourceTree = "<group>"; };
 		B7F5C826AF0E9B502023046C /* Pods-CrazyWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrazyWeather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		EFB649E1E80A59AE9D3146CC /* Pods_CrazyWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CrazyWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +73,8 @@
 		031F09D31F87060F003099C1 /* CrazyWeather */ = {
 			isa = PBXGroup;
 			children = (
+				034F233D1F9AD800003B0401 /* Views */,
+				034F233A1F9AD4BE003B0401 /* Models */,
 				0332B3111F8DCF7B00146829 /* Controllers */,
 				031F09D41F87060F003099C1 /* AppDelegate.swift */,
 				031F09D81F87060F003099C1 /* Main.storyboard */,
@@ -83,8 +91,25 @@
 				031F09D61F87060F003099C1 /* TabViewController.swift */,
 				0332B30F1F8DCF7500146829 /* MapViewController.swift */,
 				03A2C1E51F8EE1CD003875E7 /* WeatherViewController.swift */,
+				03FABD2A1F958DCD008C226E /* ForecastCollectionViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		034F233A1F9AD4BE003B0401 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				034F233B1F9AD546003B0401 /* DayFrameForecast.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		034F233D1F9AD800003B0401 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				034F233E1F9AD848003B0401 /* DayFrameCollectionViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		1C85E5DA899705876E3C749C /* Frameworks */ = {
@@ -240,9 +265,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03FABD2B1F958DCD008C226E /* ForecastCollectionViewController.swift in Sources */,
+				034F233C1F9AD546003B0401 /* DayFrameForecast.swift in Sources */,
 				031F09D71F87060F003099C1 /* TabViewController.swift in Sources */,
 				03A2C1E61F8EE1CD003875E7 /* WeatherViewController.swift in Sources */,
 				0332B3101F8DCF7500146829 /* MapViewController.swift in Sources */,
+				034F233F1F9AD848003B0401 /* DayFrameCollectionViewCell.swift in Sources */,
 				031F09D51F87060F003099C1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
