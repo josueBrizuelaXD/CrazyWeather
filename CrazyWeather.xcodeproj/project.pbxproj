@@ -73,6 +73,7 @@
 		031F09D31F87060F003099C1 /* CrazyWeather */ = {
 			isa = PBXGroup;
 			children = (
+				033F57BA1FA931D600310606 /* Helpers */,
 				034F233D1F9AD800003B0401 /* Views */,
 				034F233A1F9AD4BE003B0401 /* Models */,
 				0332B3111F8DCF7B00146829 /* Controllers */,
@@ -94,6 +95,13 @@
 				03FABD2A1F958DCD008C226E /* ForecastCollectionViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		033F57BA1FA931D600310606 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		034F233A1F9AD4BE003B0401 /* Models */ = {

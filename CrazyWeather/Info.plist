@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This allows us to save battery life by requesting weather data only when there is a significant location change</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Authorize app so I can show the weather of your location</string>
+	<string>Provide authorization to provide you with accurate location-based weather</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
