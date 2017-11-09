@@ -15,8 +15,6 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var summaryWeatherLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     
-    
-    
     let apiKey = "082e6533e8dc5235d377971b22a93ce5"
     let apiURL = "https://api.openweathermap.org/data/2.5/weather?lat=29.74&lon=-95.23&appid=082e6533e8dc5235d377971b22a93ce5"
     let defaultSession = URLSession(configuration: .default)
@@ -68,7 +66,7 @@ class WeatherViewController: UIViewController {
         if var urlComponents = URLComponents(string:"https://api.openweathermap.org/data/2.5/weather") {
             urlComponents.query = "lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)"
             guard let url = urlComponents.url else { return }
-            
+            print("[JOSH] url: \(url)")
             dataTask = defaultSession.dataTask(with: url) {
                 data, response, error in
                 defer {
@@ -96,13 +94,15 @@ class WeatherViewController: UIViewController {
         
         guard let cityName = json["name"] as? String else { return }
         //update city label
-        self.cityLabel.text = cityName
+       self.cityLabel.text = cityName
         
         if let weatherSummary = json["weather"] as? [Any] {
             if let summaryDict = weatherSummary[0] as? [String: Any] {
                 //update weather summary label
-                if let desc = summaryDict["description"] as? String {
-                    self.summaryWeatherLabel.text = desc
+                if let weatherSum = summaryDict["description"] as? String {
+                    
+                    let w =  capitalizeSubstrings(from: weatherSum)
+                    self.summaryWeatherLabel.text = w
                 }
             }
             
@@ -112,9 +112,28 @@ class WeatherViewController: UIViewController {
             print("[JOSH] main: \(main)")
             if let temp = main["temp"] as? Double {
                 print("[JOSH] temp \(temp)")
+                let t = kelvinToFah(k: temp)
+                tempLabel.text = String(t) + "º"
             }
         }
         
+    }
+    
+    func capitalizeSubstrings(from string: String) -> String {
+        let substrings = string.split(separator: " ")
+        var newString = ""
+        
+        for substring in substrings {
+            var capitalizedSubstring = ""
+            let firstChar = substring[substring.startIndex]
+             let firstLetter = String(firstChar)
+            let remainingSubstring = substring[substring.index(after: substring.startIndex)...]
+            let upperChar = firstLetter.uppercased()
+            capitalizedSubstring = upperChar + remainingSubstring
+            newString += capitalizedSubstring + " "
+        }
+        
+        return newString
     }
     
     func parseJSON(data: Data) -> [String: Any]? {
@@ -135,6 +154,13 @@ class WeatherViewController: UIViewController {
         return nil
     }
     
+    func kelvinToCelsius(k:Double) -> Int {
+        return Int(round(k - 273.15))
+    }
+    
+    func kelvinToFah(k:Double) -> Int {
+        return Int(round((k * 9 / 5) - 459.67))
+    }
 }
 
 extension WeatherViewController: CLLocationManagerDelegate {
