@@ -8,12 +8,12 @@
 
 import Foundation
 
-class DayFrameForecast {
-    let timeFrame: String
+struct DayFrameForecast: Codable {
     let temperature : String
     
-    init(timeFrame: String, temperature: String) {
-        self.temperature = temperature
-        self.timeFrame = timeFrame
+   
+    enum CodingKeys: String, CodingKey {
+        case temperature = "temp"
+        
     }
 }

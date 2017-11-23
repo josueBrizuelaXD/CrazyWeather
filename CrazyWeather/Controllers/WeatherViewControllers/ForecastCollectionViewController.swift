@@ -7,19 +7,7 @@
 //
 
 import UIKit
-
-let dayTimeFrames = [
-    DayFrameForecast(timeFrame:"Now", temperature:"95º"),
-    DayFrameForecast(timeFrame:"9PM", temperature:"94º"),
-    DayFrameForecast(timeFrame:"10PM", temperature:"95º"),
-    DayFrameForecast(timeFrame:"11PM", temperature:"96º"),
-    DayFrameForecast(timeFrame:"12AM", temperature:"93º"),
-    DayFrameForecast(timeFrame:"1AM", temperature:"95º"),
-    DayFrameForecast(timeFrame:"2AM", temperature:"94º"),
-    DayFrameForecast(timeFrame:"3AM", temperature:"95º"),
-    DayFrameForecast(timeFrame:"4AM", temperature:"96º"),
-    DayFrameForecast(timeFrame:"5AM", temperature:"93º")
-]
+var dayTimeFrames = [DayFrameForecast]()
 
 class ForecastViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -28,9 +16,30 @@ class ForecastViewController: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        //add observer
+        NotificationCenter.default.addObserver(self, selector: #selector(onNotification(notification:)), name: WeatherViewController.forecastNotification, object: nil)
+    }
+    
+    @objc func onNotification(notification: Notification) {
+        
+        if let userInfo = notification.userInfo as? [String: Any] {
+            print("[JOSH] userInfo: \(userInfo)")
+            if let list = userInfo["list"] as? [Any] {
+                print("[JOSH] list count: \(list.count)")
+              if let main = list[0] as? [String: Any] {
+                    print("[JOSH] \(main)")
+                if let pres = main["main"] as? [String:Any] {
+                    print("[JOSH] press\(pres)")
+                }
+                }
+            }
+        }
     }
 
-
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension ForecastViewController: UICollectionViewDelegate {
@@ -47,7 +56,6 @@ extension ForecastViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dayFrameViewCell", for: indexPath) as! DayFrameCollectionViewCell
         
         let dayFrame = dayTimeFrames[indexPath.row]
-        cell.timeFrameLabel.text = dayFrame.timeFrame
         cell.timeFrameTempLabel.text = dayFrame.temperature
         
         return cell

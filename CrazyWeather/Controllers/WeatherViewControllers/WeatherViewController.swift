@@ -15,11 +15,8 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var summaryWeatherLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     
-    let apiKey = "082e6533e8dc5235d377971b22a93ce5"
-    let apiURL = "https://api.openweathermap.org/data/2.5/weather?lat=29.74&lon=-95.23&appid=082e6533e8dc5235d377971b22a93ce5"
-    let defaultSession = URLSession(configuration: .default)
-    var dataTask: URLSessionDataTask?
     let locationManager = CLLocationManager()
+    static let forecastNotification = Notification.Name("ForecastNotification")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,35 +57,9 @@ class WeatherViewController: UIViewController {
     }
     
     
-    func getWeatherResultsFor(latitude: Double, longitude: Double) {
-        dataTask?.cancel()
-        
-        if var urlComponents = URLComponents(string:"https://api.openweathermap.org/data/2.5/weather") {
-            urlComponents.query = "lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)"
-            guard let url = urlComponents.url else { return }
-            print("[JOSH] url: \(url)")
-            dataTask = defaultSession.dataTask(with: url) {
-                data, response, error in
-                defer {
-                    self.dataTask = nil
-                }
-                
-                if let error = error {
-                    print("[JOSH] error: \(error)")
-                    
-                } else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                    let jsonDict = self.parseJSON(data: data)
-                    
-                    if let jsonDict = jsonDict {
-                        DispatchQueue.main.async {
-                            self.updateUIWith(json: jsonDict)
-                        }
-                    }
-                }
-            }
-            dataTask?.resume()
-        }
-    }
+
+    
+    //MARK: - Update UI Elements
     
     func updateUIWith(json:[String: Any]) {
         
@@ -119,6 +90,9 @@ class WeatherViewController: UIViewController {
         
     }
     
+    //MARK: - Helper Methods
+    
+    
     func capitalizeSubstrings(from string: String) -> String {
         let substrings = string.split(separator: " ")
         var newString = ""
@@ -136,23 +110,7 @@ class WeatherViewController: UIViewController {
         return newString
     }
     
-    func parseJSON(data: Data) -> [String: Any]? {
-        
-        var jsonDict : [String: Any]?
-        
-        do {
-            jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-        } catch let parseErr as NSError {
-            print("[JOSH] err: \(parseErr)")
-        }
-        
-        if let jsonDict = jsonDict {
-            print("[JOSH] json: \(jsonDict)")
-            return jsonDict
-        }
-        
-        return nil
-    }
+ 
     
     func kelvinToCelsius(k:Double) -> Int {
         return Int(round(k - 273.15))
@@ -184,7 +142,25 @@ extension WeatherViewController: CLLocationManagerDelegate {
         
         
         
-        getWeatherResultsFor(latitude: latitude, longitude: longitude)
+        WeatherAPI.shared.getWeatherResultsFor(latitude: latitude, longitude: longitude, completion: {
+            data in
+            let jsonDict = WeatherAPI.shared.parseJSON(data: data)
+            if let jsonDict = jsonDict {
+                DispatchQueue.main.async {
+                    self.updateUIWith(json: jsonDict)
+                }
+            }
+            
+            WeatherAPI.shared.getForecastResultsFor(latitude: latitude, longitude: longitude) {
+                data in
+                let jsonDict = WeatherAPI.shared.parseJSON(data: data)
+                if let jsonDict = jsonDict {
+                    NotificationCenter.default.post(name: WeatherViewController.forecastNotification, object: nil, userInfo: jsonDict)
+                }
+            }
+        })
+            
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
