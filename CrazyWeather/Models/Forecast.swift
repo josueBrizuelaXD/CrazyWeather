@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct DayFrameForecast: Codable {
+struct Forecast: Codable {
     let temperature : String
     
-   
+  
     enum CodingKeys: String, CodingKey {
         case temperature = "temp"
         

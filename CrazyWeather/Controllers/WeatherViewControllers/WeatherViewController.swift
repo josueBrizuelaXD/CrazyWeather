@@ -16,15 +16,23 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var tempLabel: UILabel!
     
     let locationManager = CLLocationManager()
-    static let forecastNotification = Notification.Name("ForecastNotification")
+    private var token: NSKeyValueObservation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         enableBasicLocationServices()
-        
+        token = WeatherAPI.shared.observe(\.weather) {
+            weatherAPI, v in
+            print("[JOSH] o: \(weatherAPI)")
+            print("[JOSH] v: \(v)")
+            
+            DispatchQueue.main.async {
+                self.updateWeatherLabelsWith(weatherData: weatherAPI.weather)
+            }
+            
+        }
     }
-    
     func enableBasicLocationServices() {
         locationManager.delegate = self
         
@@ -57,36 +65,17 @@ class WeatherViewController: UIViewController {
     }
     
     
-
+    
     
     //MARK: - Update UI Elements
     
-    func updateUIWith(json:[String: Any]) {
+    func updateWeatherLabelsWith(weatherData: Weather?) {
         
-        guard let cityName = json["name"] as? String else { return }
-        //update city label
-       self.cityLabel.text = cityName
-        
-        if let weatherSummary = json["weather"] as? [Any] {
-            if let summaryDict = weatherSummary[0] as? [String: Any] {
-                //update weather summary label
-                if let weatherSum = summaryDict["description"] as? String {
-                    
-                    let w =  capitalizeSubstrings(from: weatherSum)
-                    self.summaryWeatherLabel.text = w
-                }
-            }
-            
-        }
-        
-        if let main = json["main"] as? [String: Any] {
-            print("[JOSH] main: \(main)")
-            if let temp = main["temp"] as? Double {
-                print("[JOSH] temp \(temp)")
-                let t = kelvinToFah(k: temp)
-                tempLabel.text = String(t) + "º"
-            }
-        }
+        guard let weather = weatherData else { return }
+        self.cityLabel.text = weather.name
+        let w =  capitalizeSubstrings(from: weather.weather[0].summary)
+        self.summaryWeatherLabel.text = w
+        tempLabel.text = String(Int(weather.main.temp.rounded())) + "º"
         
     }
     
@@ -100,7 +89,7 @@ class WeatherViewController: UIViewController {
         for substring in substrings {
             var capitalizedSubstring = ""
             let firstChar = substring[substring.startIndex]
-             let firstLetter = String(firstChar)
+            let firstLetter = String(firstChar)
             let remainingSubstring = substring[substring.index(after: substring.startIndex)...]
             let upperChar = firstLetter.uppercased()
             capitalizedSubstring = upperChar + remainingSubstring
@@ -108,16 +97,6 @@ class WeatherViewController: UIViewController {
         }
         
         return newString
-    }
-    
- 
-    
-    func kelvinToCelsius(k:Double) -> Int {
-        return Int(round(k - 273.15))
-    }
-    
-    func kelvinToFah(k:Double) -> Int {
-        return Int(round((k * 9 / 5) - 459.67))
     }
 }
 
@@ -139,27 +118,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
         let latitude = Double(round(100 * loc.coordinate.latitude) / 100)
         let longitude = Double(round(100 * loc.coordinate.longitude) / 100)
         
-        
-        
-        
-        WeatherAPI.shared.getWeatherResultsFor(latitude: latitude, longitude: longitude, completion: {
-            data in
-            let jsonDict = WeatherAPI.shared.parseJSON(data: data)
-            if let jsonDict = jsonDict {
-                DispatchQueue.main.async {
-                    self.updateUIWith(json: jsonDict)
-                }
-            }
-            
-            WeatherAPI.shared.getForecastResultsFor(latitude: latitude, longitude: longitude) {
-                data in
-                let jsonDict = WeatherAPI.shared.parseJSON(data: data)
-                if let jsonDict = jsonDict {
-                    NotificationCenter.default.post(name: WeatherViewController.forecastNotification, object: nil, userInfo: jsonDict)
-                }
-            }
-        })
-            
+        WeatherAPI.shared.getWeatherResultsFor(latitude: latitude, longitude: longitude)
         
     }
     
