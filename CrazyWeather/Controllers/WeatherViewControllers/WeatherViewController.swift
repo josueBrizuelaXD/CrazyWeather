@@ -24,8 +24,6 @@ class WeatherViewController: UIViewController {
         enableBasicLocationServices()
         token = WeatherAPI.shared.observe(\.weather) {
             weatherAPI, v in
-            print("[JOSH] o: \(weatherAPI)")
-            print("[JOSH] v: \(v)")
             
             DispatchQueue.main.async {
                 self.updateWeatherLabelsWith(weatherData: weatherAPI.weather)
@@ -119,7 +117,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
         let longitude = Double(round(100 * loc.coordinate.longitude) / 100)
         
         WeatherAPI.shared.getWeatherResultsFor(latitude: latitude, longitude: longitude)
-        
+        WeatherAPI.shared.getForecastResultsFor(latitude: latitude, longitude: longitude)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

@@ -19,6 +19,7 @@ class WeatherTableViewController: UITableViewController {
     @IBOutlet weak var minTempLbl: UILabel!
     
     private var token: NSKeyValueObservation?
+    private var forecastToken: NSKeyValueObservation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,17 @@ class WeatherTableViewController: UITableViewController {
             weatherAPI, _ in
             DispatchQueue.main.async {
                 self.updateWeatherLabelsWith(weatherData: weatherAPI.weather)
+            }
+            
+        }
+        
+        forecastToken = WeatherAPI.shared.observe(\.forecast) {
+            weatherAPI, v in
+            print("[JOSH]: forecast property2 \(weatherAPI) and v2: \(v)")
+            if let list = weatherAPI.forecast?.list {
+                
+               
+                
             }
             
         }
@@ -56,15 +68,15 @@ class WeatherTableViewController: UITableViewController {
         }
         
         if let winDeg = weatherData.wind?.deg {
-            windSpeedLbl.text = String(winDeg)
+            windDegLbl.text = String(winDeg)
         }
         
         if let maxTemp = weatherData.main.tempMax {
-            maxTempLbl.text = String(Int(maxTemp.rounded()))
+            maxTempLbl.text = String(Int(maxTemp.rounded())) + "º"
         }
         
         if let minTemp = weatherData.main.tempMin {
-            minTempLbl.text = String(Int(minTemp.rounded()))
+            minTempLbl.text = String(Int(minTemp.rounded())) + "º"
         }
         
         

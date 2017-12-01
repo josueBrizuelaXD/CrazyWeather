@@ -13,7 +13,7 @@ class WeatherAPI: NSObject {
     private static let basePath = "https://api.openweathermap.org/data/2.5/"
     private static let apiKey = "082e6533e8dc5235d377971b22a93ce5"
     @objc dynamic private(set) var weather: Weather?
-    private(set) var forecast: [Forecast] = []
+    @objc dynamic private(set) var forecast: Forecast?
     
     private enum API {
         
@@ -35,14 +35,14 @@ class WeatherAPI: NSObject {
         var urlComponents = API.currentWeather.path()
         urlComponents.query = "lat=\(latitude)&lon=\(longitude)&appid=\(WeatherAPI.apiKey)&units=imperial"
         guard let url = urlComponents.url else { return }
-        print("[JOSH] url: \(url)")
+//        print("[JOSH] url: \(url)")
         
         fetch(url: url) {
             data in
-            print("[JOSH] data: \(data!)")
+//            print("[JOSH] data: \(data!)")
             do {
                 let weather = try JSONDecoder().decode(Weather.self, from:data!)
-                print("[JOSH] weather: \(weather)")
+//                print("[JOSH] weather: \(weather)")
                 self.weather =  weather
             } catch let error {
                 print("[JOSH] \(error)")
@@ -61,7 +61,14 @@ class WeatherAPI: NSObject {
         
         fetch(url: url) {
             data in
-            
+            print("[JOSH] data: \(data!)")
+            do {
+                let forecast = try JSONDecoder().decode(Forecast.self, from:data!)
+                print("[JOSH] forecast: \(forecast)")
+                self.forecast =  forecast
+            } catch let error {
+                print("[JOSH] \(error)")
+            }
         }
         
     }
