@@ -17,9 +17,15 @@ class WeatherTableViewController: UITableViewController {
     @IBOutlet weak var windDegLbl: UILabel!
     @IBOutlet weak var maxTempLbl: UILabel!
     @IBOutlet weak var minTempLbl: UILabel!
+    @IBOutlet var daysLbls: [UILabel]!
+    @IBOutlet var minTempLbls: [UILabel]!
+    @IBOutlet var maxTempLbls: [UILabel]!
+    
+    
     
     private var token: NSKeyValueObservation?
     private var forecastToken: NSKeyValueObservation?
+    private var weekDays = [ForecastFrame]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +40,46 @@ class WeatherTableViewController: UITableViewController {
         
         forecastToken = WeatherAPI.shared.observe(\.forecast) {
             weatherAPI, v in
-            print("[JOSH]: forecast property2 \(weatherAPI) and v2: \(v)")
+//            print("[JOSH]: forecast property2 \(weatherAPI) and v2: \(v)")
             if let list = weatherAPI.forecast?.list {
-                
                
+                let days = Int((Double(list.count) / 8.0).rounded())
+               
+//                print("[JOSH] list: \(list.count)")
+//                print("[JOSH] days: \(days)")
+      
+                for i in 1...days {
+                   let dayIndex = i * 8
+                    
+                    if dayIndex <= list.count {
+                        let day = list[dayIndex]
+                        self.weekDays.append(day)
+                    } else {
+                        
+                        self.weekDays.append(list[list.count - 1])
+                    }
+                }
                 
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale(identifier: "en_US")
+                dateFormatter.setLocalizedDateFormatFromTemplate("EEEE")
+               
+                DispatchQueue.main.async {
+                    
+                    for (i, lbl) in self.daysLbls.enumerated() {
+                        let minTempLbl = self.minTempLbls[i]
+                        let maxTempLbl = self.maxTempLbls[i]
+                        let dayFrame = self.weekDays[i]
+                        let dayTime = dayFrame.dt
+                        let date = Date(timeIntervalSince1970: TimeInterval(dayTime))
+                        lbl.text = dateFormatter.string(from: date)
+                        minTempLbl.text = String(Int(dayFrame.main.tempMin.rounded())) + "º"
+                        maxTempLbl.text = String(Int(dayFrame.main.tempMax.rounded())) + "º"
+                    }
+                }
+                
+              
             }
             
         }
@@ -82,5 +123,6 @@ class WeatherTableViewController: UITableViewController {
         
        
     }
-
+    
+  
 }

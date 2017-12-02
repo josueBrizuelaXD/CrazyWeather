@@ -704,6 +704,21 @@
                         <outlet property="sunsetLbl" destination="NQk-wq-AR3" id="u8l-Z4-206"/>
                         <outlet property="windDegLbl" destination="kMl-Kx-emf" id="QGy-0z-jXa"/>
                         <outlet property="windSpeedLbl" destination="UwA-P7-FCo" id="pfl-JO-NFe"/>
+                        <outletCollection property="daysLbls" destination="d0Q-1V-UXF" collectionClass="NSMutableArray" id="gee-HM-Cw5"/>
+                        <outletCollection property="daysLbls" destination="VFY-a5-ARa" collectionClass="NSMutableArray" id="a5I-LS-kxe"/>
+                        <outletCollection property="daysLbls" destination="Bnh-y4-p6a" collectionClass="NSMutableArray" id="mG8-gU-T7g"/>
+                        <outletCollection property="daysLbls" destination="Ic8-nI-4xs" collectionClass="NSMutableArray" id="yCG-bp-4ge"/>
+                        <outletCollection property="daysLbls" destination="YcT-t1-web" collectionClass="NSMutableArray" id="LYs-8u-yPI"/>
+                        <outletCollection property="minTempLbls" destination="dW8-Ac-xi4" collectionClass="NSMutableArray" id="ue1-sV-w8q"/>
+                        <outletCollection property="minTempLbls" destination="e4T-72-WhG" collectionClass="NSMutableArray" id="wdv-oN-cbd"/>
+                        <outletCollection property="minTempLbls" destination="l8M-fV-E49" collectionClass="NSMutableArray" id="ges-5p-hKE"/>
+                        <outletCollection property="minTempLbls" destination="qPw-hA-RSg" collectionClass="NSMutableArray" id="f9d-aJ-qMs"/>
+                        <outletCollection property="minTempLbls" destination="i5d-94-EMm" collectionClass="NSMutableArray" id="8bG-gs-BH8"/>
+                        <outletCollection property="maxTempLbls" destination="MAU-hb-Px7" collectionClass="NSMutableArray" id="YgS-n9-wdj"/>
+                        <outletCollection property="maxTempLbls" destination="thO-dZ-u9e" collectionClass="NSMutableArray" id="cjc-nt-B3f"/>
+                        <outletCollection property="maxTempLbls" destination="t9y-VL-fKt" collectionClass="NSMutableArray" id="iRO-P2-3Ec"/>
+                        <outletCollection property="maxTempLbls" destination="vea-va-HRm" collectionClass="NSMutableArray" id="hXs-em-WGT"/>
+                        <outletCollection property="maxTempLbls" destination="cea-C7-Ivd" collectionClass="NSMutableArray" id="fvW-xc-88Z"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GK6-Ge-0oW" userLabel="First Responder" sceneMemberID="firstResponder"/>

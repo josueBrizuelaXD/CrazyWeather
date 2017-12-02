@@ -61,7 +61,7 @@ extension ForecastViewController: UICollectionViewDataSource {
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.setLocalizedDateFormatFromTemplate("h a")
         
-        let date = Date(timeIntervalSinceReferenceDate: TimeInterval(dayFrame.dt))
+        let date = Date(timeIntervalSince1970: TimeInterval(dayFrame.dt))
         
         cell.timeFrameLabel.text = dateFormatter.string(from: date)
         cell.timeFrameTempLabel.text = String(Int(dayFrame.main.temp.rounded())) + "º"
