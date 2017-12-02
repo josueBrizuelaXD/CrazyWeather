@@ -45,13 +45,13 @@ class WeatherTableViewController: UITableViewController {
                
                 let days = Int((Double(list.count) / 8.0).rounded())
                
-//                print("[JOSH] list: \(list.count)")
+                print("[JOSH] list: \(list.count)")
 //                print("[JOSH] days: \(days)")
       
                 for i in 1...days {
                    let dayIndex = i * 8
                     
-                    if dayIndex <= list.count {
+                    if dayIndex <= list.count - 1 {
                         let day = list[dayIndex]
                         self.weekDays.append(day)
                     } else {
