@@ -11,12 +11,23 @@ import CoreLocation
 
 class WeatherViewController: UIViewController {
     
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var summaryWeatherLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     
     let locationManager = CLLocationManager()
     private var token: NSKeyValueObservation?
+    
+    
+    //weather-backgrounds
+  private enum WeatherBackgrounds: String {
+        case clear = "sunny-landscape"
+        case snow = "snow-landscape"
+        case rain = "rain-landscape"
+        case afternoon = "afternoon-landscape"
+        case night = "night-landscape"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +37,7 @@ class WeatherViewController: UIViewController {
             weatherAPI, v in
             
             DispatchQueue.main.async {
-                self.updateWeatherLabelsWith(weatherData: weatherAPI.weather)
+                self.updateWeatherViewsWith(weatherData: weatherAPI.weather)
             }
             
         }
@@ -67,7 +78,7 @@ class WeatherViewController: UIViewController {
     
     //MARK: - Update UI Elements
     
-    func updateWeatherLabelsWith(weatherData: Weather?) {
+    func updateWeatherViewsWith(weatherData: Weather?) {
         
         guard let weather = weatherData else { return }
         self.cityLabel.text = weather.name
@@ -75,10 +86,80 @@ class WeatherViewController: UIViewController {
         self.summaryWeatherLabel.text = w
         tempLabel.text = String(Int(weather.main.temp.rounded())) + "º"
         
+        if let image = self.updateBackgroundWith(image: weather.weather[0].summary, time:weather.dt) {
+           
+            UIView.animate(withDuration: 0.8, delay: 0.0, options: [.curveEaseIn], animations: {
+                 self.backgroundImage.alpha = 0.0
+                
+            }, completion: {
+                completed in
+                
+                UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveEaseOut], animations: {
+                    self.backgroundImage.image = image
+                    self.backgroundImage.alpha = 1.0
+                })
+            })
+            
+        }
+       
     }
     
     //MARK: - Helper Methods
+    private func updateBackgroundWith(image: String, time: Int?) -> UIImage? {
+//    print("[JOSH] : image \(image)")
+    var weatherImage : WeatherBackgrounds = WeatherBackgrounds.clear
     
+    switch image {
+    case "Snow":
+        weatherImage = WeatherBackgrounds.snow
+    case "Rain":
+        weatherImage = WeatherBackgrounds.rain
+    
+    default:
+        
+        if let time = time {
+            let date = Date(timeIntervalSince1970: TimeInterval(time))
+            print("date \(date)")
+            let calendar = Calendar.current
+            let dateComponents = calendar.dateComponents([.hour], from: date)
+            
+            if let hour = dateComponents.hour {
+                print("hour \(hour)")
+                
+                switch hour {
+                case 12...18:
+                    weatherImage = WeatherBackgrounds.afternoon
+                case 19...23:
+                   weatherImage = WeatherBackgrounds.night
+                default:
+                    weatherImage = WeatherBackgrounds.clear
+                }
+                
+            }
+        }
+    }
+    
+    
+    
+    var image : UIImage? = nil
+    
+    repeat {
+        let randomInt = randomNumber(range: Range(1...3))
+//        print("[JOSH] randInt: \(randomInt)")
+//        print("[JOSH] weatherImage: \(weatherImage)")
+        let imageName = weatherImage.rawValue + "-\(randomInt)"
+//        print("[JOSH] imageName: \(imageName)")
+        
+        image = UIImage(named: imageName)
+    } while image == nil
+    
+//    print("[JOSH] end: \(image)")
+    return image
+    }
+    
+    func randomNumber(range: Range<UInt32>) -> Int {
+        return Int(arc4random_uniform(UInt32(range.upperBound - range.lowerBound)) + range.lowerBound)
+    }
     
     func capitalizeSubstrings(from string: String) -> String {
         let substrings = string.split(separator: " ")

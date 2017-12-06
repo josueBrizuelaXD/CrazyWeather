@@ -45,7 +45,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="night-landscape" translatesAutoresizingMaskIntoConstraints="NO" id="IEN-8w-3Ly">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunny-landscape-1" highlightedImage="night-landscape-3" translatesAutoresizingMaskIntoConstraints="NO" id="IEN-8w-3Ly">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOR-vA-hzr">
@@ -113,7 +113,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="D8V-jX-DEy" firstAttribute="trailing" secondItem="FOR-vA-hzr" secondAttribute="trailing" id="3dH-nC-OIe"/>
                             <constraint firstAttribute="bottom" secondItem="IEN-8w-3Ly" secondAttribute="bottom" id="YPD-e8-kjT"/>
@@ -131,6 +131,7 @@
                     </tabBarItem>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
+                        <outlet property="backgroundImage" destination="IEN-8w-3Ly" id="b75-a3-cdx"/>
                         <outlet property="cityLabel" destination="jEc-bX-Gg3" id="Yl0-2Z-zdy"/>
                         <outlet property="summaryWeatherLabel" destination="ZCw-OT-m6O" id="dAR-mE-uHB"/>
                         <outlet property="tempLabel" destination="myG-x3-LXF" id="jQ1-5a-Nep"/>
@@ -164,7 +165,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hLd-NF-SZC">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hLd-NF-SZC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="qFh-5B-9Wz">
@@ -181,26 +182,26 @@
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hed-pp-AbD">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="hed-pp-AbD">
                                                     <rect key="frame" x="0.0" y="-4" width="78" height="122"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="4" translatesAutoresizingMaskIntoConstraints="NO" id="0xE-zI-CeM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="33.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="28.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunny" translatesAutoresizingMaskIntoConstraints="NO" id="2mI-TT-Bvd">
-                                                            <rect key="frame" x="0.0" y="33.5" width="60" height="33"/>
+                                                            <rect key="frame" x="0.0" y="28.5" width="60" height="41.5"/>
                                                         </imageView>
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="Yt4-CR-mdf">
-                                                            <rect key="frame" x="0.0" y="66.5" width="60" height="0.0"/>
+                                                            <rect key="frame" x="0.0" y="70" width="60" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                             <color key="textColor" red="0.23921761247929985" green="0.48794431709605779" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="75º" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="XFT-fG-Mud">
-                                                            <rect key="frame" x="0.0" y="66.5" width="60" height="33.5"/>
+                                                            <rect key="frame" x="0.0" y="70" width="60" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -258,7 +259,7 @@
         <scene sceneID="2RC-ka-rvR">
             <objects>
                 <tableViewController id="1Yo-G4-eBd" customClass="WeatherTableViewController" customModule="CrazyWeather" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="static" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="RzH-Rj-feT">
+                    <tableView key="view" clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="static" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="RzH-Rj-feT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -286,10 +287,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunny" translatesAutoresizingMaskIntoConstraints="NO" id="Dlb-ir-KUI">
-                                                    <rect key="frame" x="172" y="7" width="30" height="30"/>
+                                                    <rect key="frame" x="167" y="2" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="T3M-XZ-d0u"/>
-                                                        <constraint firstAttribute="height" constant="30" id="t21-NX-UZB"/>
+                                                        <constraint firstAttribute="width" constant="40" id="T3M-XZ-d0u"/>
+                                                        <constraint firstAttribute="height" constant="40" id="t21-NX-UZB"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dW8-Ac-xi4">
@@ -332,10 +333,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunny" translatesAutoresizingMaskIntoConstraints="NO" id="zpI-hH-2s4">
-                                                    <rect key="frame" x="172" y="7" width="30" height="30"/>
+                                                    <rect key="frame" x="167" y="2" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="Sin-fe-EYC"/>
-                                                        <constraint firstAttribute="height" constant="30" id="aUY-PV-QRK"/>
+                                                        <constraint firstAttribute="width" constant="40" id="Sin-fe-EYC"/>
+                                                        <constraint firstAttribute="height" constant="40" id="aUY-PV-QRK"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4T-72-WhG">
@@ -378,10 +379,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunny" translatesAutoresizingMaskIntoConstraints="NO" id="Xb9-5q-y8J">
-                                                    <rect key="frame" x="172" y="7" width="30" height="30"/>
+                                                    <rect key="frame" x="167" y="2" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="aPS-1X-XNF"/>
-                                                        <constraint firstAttribute="width" constant="30" id="jrV-R2-mLu"/>
+                                                        <constraint firstAttribute="height" constant="40" id="aPS-1X-XNF"/>
+                                                        <constraint firstAttribute="width" constant="40" id="jrV-R2-mLu"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8M-fV-E49">
@@ -424,10 +425,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunny" translatesAutoresizingMaskIntoConstraints="NO" id="MKc-KI-7Zc">
-                                                    <rect key="frame" x="172" y="7" width="30" height="30"/>
+                                                    <rect key="frame" x="167" y="2" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="6i0-SY-6HG"/>
-                                                        <constraint firstAttribute="height" constant="30" id="fpf-Kd-hfg"/>
+                                                        <constraint firstAttribute="width" constant="40" id="6i0-SY-6HG"/>
+                                                        <constraint firstAttribute="height" constant="40" id="fpf-Kd-hfg"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPw-hA-RSg">
@@ -476,10 +477,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunny" translatesAutoresizingMaskIntoConstraints="NO" id="bL1-pB-9UC">
-                                                    <rect key="frame" x="172" y="7" width="30" height="30"/>
+                                                    <rect key="frame" x="167" y="2" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="Yw1-bj-skf"/>
-                                                        <constraint firstAttribute="width" constant="30" id="dDB-Zu-B8b"/>
+                                                        <constraint firstAttribute="height" constant="40" id="Yw1-bj-skf"/>
+                                                        <constraint firstAttribute="width" constant="40" id="dDB-Zu-B8b"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -710,6 +711,11 @@
                         <outletCollection property="maxTempLbls" destination="t9y-VL-fKt" collectionClass="NSMutableArray" id="iRO-P2-3Ec"/>
                         <outletCollection property="maxTempLbls" destination="vea-va-HRm" collectionClass="NSMutableArray" id="hXs-em-WGT"/>
                         <outletCollection property="maxTempLbls" destination="cea-C7-Ivd" collectionClass="NSMutableArray" id="fvW-xc-88Z"/>
+                        <outletCollection property="weatherIcons" destination="Dlb-ir-KUI" collectionClass="NSMutableArray" id="FLM-5E-xLT"/>
+                        <outletCollection property="weatherIcons" destination="zpI-hH-2s4" collectionClass="NSMutableArray" id="BYu-FG-k8u"/>
+                        <outletCollection property="weatherIcons" destination="Xb9-5q-y8J" collectionClass="NSMutableArray" id="zub-wm-OFC"/>
+                        <outletCollection property="weatherIcons" destination="MKc-KI-7Zc" collectionClass="NSMutableArray" id="aVk-23-Xs5"/>
+                        <outletCollection property="weatherIcons" destination="bL1-pB-9UC" collectionClass="NSMutableArray" id="pmY-01-ttu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GK6-Ge-0oW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -718,9 +724,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="night-landscape" width="4896" height="3264"/>
+        <image name="night-landscape-3" width="6000" height="4000"/>
         <image name="radar-icon" width="25" height="25"/>
         <image name="sunny" width="25" height="25"/>
+        <image name="sunny-landscape-1" width="1920" height="1079"/>
         <image name="weather-icon" width="25" height="25"/>
     </resources>
 </document>

@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class Forecast: NSObject, Codable {
     let list : [ForecastFrame]
     
@@ -21,6 +22,7 @@ struct ForecastFrame: Codable {
     let dt: Int
     let main: MainForecast
     let weather: [ForecastWeather]
+    
 }
 
 struct MainForecast: Codable {

@@ -20,12 +20,18 @@ class WeatherTableViewController: UITableViewController {
     @IBOutlet var daysLbls: [UILabel]!
     @IBOutlet var minTempLbls: [UILabel]!
     @IBOutlet var maxTempLbls: [UILabel]!
+    @IBOutlet var weatherIcons: [UIImageView]!
     
     
     
     private var token: NSKeyValueObservation?
     private var forecastToken: NSKeyValueObservation?
-    private var weekDays = [ForecastFrame]()
+    private var weekDays = [DayFrame]()
+    
+    private struct DayFrame {
+        let forecast : ForecastFrame
+        let image: UIImage?
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +39,7 @@ class WeatherTableViewController: UITableViewController {
         token = WeatherAPI.shared.observe(\.weather) {
             weatherAPI, _ in
             DispatchQueue.main.async {
-                self.updateWeatherLabelsWith(weatherData: weatherAPI.weather)
+                self.updateWeatherViewssWith(weatherData: weatherAPI.weather)
             }
             
         }
@@ -42,50 +48,62 @@ class WeatherTableViewController: UITableViewController {
             weatherAPI, v in
 //            print("[JOSH]: forecast property2 \(weatherAPI) and v2: \(v)")
             if let list = weatherAPI.forecast?.list {
-               
+               var dayForecastFrames = [ForecastFrame]()
+                
                 let days = Int((Double(list.count) / 8.0).rounded())
                
                 print("[JOSH] list: \(list.count)")
-//                print("[JOSH] days: \(days)")
+                print("[JOSH] days: \(days)")
       
                 for i in 1...days {
                    let dayIndex = i * 8
                     
                     if dayIndex <= list.count - 1 {
                         let day = list[dayIndex]
-                        self.weekDays.append(day)
+                        dayForecastFrames.append(day)
                     } else {
                         
-                        self.weekDays.append(list[list.count - 1])
+                        dayForecastFrames.append(list[list.count - 1])
                     }
                 }
                 
+                print("[JOSH] dayForecast array: \(dayForecastFrames.count)")
                 
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale(identifier: "en_US")
-                dateFormatter.setLocalizedDateFormatFromTemplate("EEEE")
-               
-                DispatchQueue.main.async {
-                    
-                    for (i, lbl) in self.daysLbls.enumerated() {
-                        let minTempLbl = self.minTempLbls[i]
-                        let maxTempLbl = self.maxTempLbls[i]
-                        let dayFrame = self.weekDays[i]
-                        let dayTime = dayFrame.dt
-                        let date = Date(timeIntervalSince1970: TimeInterval(dayTime))
-                        lbl.text = dateFormatter.string(from: date)
-                        minTempLbl.text = String(Int(dayFrame.main.tempMin.rounded())) + "º"
-                        maxTempLbl.text = String(Int(dayFrame.main.tempMax.rounded())) + "º"
-                    }
+                for (i,frame) in dayForecastFrames.enumerated() {
+                    WeatherAPI.shared.getIcon(name: frame.weather[0].icon, completion: {
+                        data in
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.locale = Locale(identifier: "en_US")
+                        dateFormatter.setLocalizedDateFormatFromTemplate("EEEE")
+                        
+                        DispatchQueue.main.async {
+                            
+                            let lbl = self.daysLbls[i]
+                            let minTempLbl = self.minTempLbls[i]
+                            let maxTempLbl = self.maxTempLbls[i]
+                            let dayTime = frame.dt
+                            let date = Date(timeIntervalSince1970: TimeInterval(dayTime))
+                            lbl.text = dateFormatter.string(from: date)
+                            minTempLbl.text = String(Int(frame.main.tempMin.rounded())) + "º"
+                            maxTempLbl.text = String(Int(frame.main.tempMax.rounded())) + "º"
+                            if let data = data {
+                                if let image = UIImage(data:data) {
+                                    let weatherIcon = self.weatherIcons[i]
+                                    weatherIcon.image = image
+                                }
+                            }
+                           
+                        }
+                    })
                 }
                 
-              
             }
             
         }
     }
     
-    func updateWeatherLabelsWith(weatherData: Weather?) {
+    func updateWeatherViewssWith(weatherData: Weather?) {
         guard let weatherData = weatherData else { return }
         
         let dateFormatter = DateFormatter()

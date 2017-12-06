@@ -15,13 +15,15 @@ class Weather: NSObject, Codable {
     let wind: WindData?
     let name: String
     let sys: SysData
+    let dt: Int
     
-    init(weather:[WeatherSummary], main: MainWeatherData, wind: WindData, name: String, sys: SysData) {
+    init(weather:[WeatherSummary], main: MainWeatherData, wind: WindData, name: String, sys: SysData, dt: Int) {
         self.weather = weather
         self.main = main
         self.wind = wind
         self.name = name
         self.sys = sys
+        self.dt = dt
     }
     
     required init(from decoder: Decoder) throws {
@@ -31,6 +33,7 @@ class Weather: NSObject, Codable {
         wind = try container.decodeIfPresent(WindData.self, forKey: .wind)
         name = try container.decode(String.self, forKey: .name)
         sys = try container.decode(SysData.self, forKey: .sys)
+        dt = try container.decode(Int.self, forKey: .dt)
     }
 }
 
@@ -74,12 +77,12 @@ class MainWeatherData: Codable {
 
 class WindData: Codable {
     let speed: Double?
-    let deg: Int?
+    let deg: Double?
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         speed = try container.decodeIfPresent(Double.self, forKey: .speed)
-        deg = try container.decodeIfPresent(Int.self, forKey: .deg)
+        deg = try container.decodeIfPresent(Double.self, forKey: .deg)
         
     }
 }

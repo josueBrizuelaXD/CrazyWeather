@@ -81,7 +81,7 @@
 				03CFABC91FC72DB9000C069D /* Other */,
 				03CFABC81FC72DA8000C069D /* Storyboards */,
 				03CFABC51FC72D64000C069D /* Assets */,
-				03CFABC71FC72D95000C069D /* Services */,
+				03CFABC71FC72D95000C069D /* Networking */,
 				034F233D1F9AD800003B0401 /* Views */,
 				034F233A1F9AD4BE003B0401 /* Models */,
 				0332B3111F8DCF7B00146829 /* Controllers */,
@@ -124,12 +124,12 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		03CFABC71FC72D95000C069D /* Services */ = {
+		03CFABC71FC72D95000C069D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				03FF9D681FC5D593001628BB /* WeatherAPI.swift */,
 			);
-			path = Services;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		03CFABC81FC72DA8000C069D /* Storyboards */ = {

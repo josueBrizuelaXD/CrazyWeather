@@ -35,7 +35,7 @@ class WeatherAPI: NSObject {
         var urlComponents = API.currentWeather.path()
         urlComponents.query = "lat=\(latitude)&lon=\(longitude)&appid=\(WeatherAPI.apiKey)&units=imperial"
         guard let url = urlComponents.url else { return }
-//        print("[JOSH] url: \(url)")
+        print("[JOSH] url: \(url)")
         
         fetch(url: url) {
             data in
@@ -50,7 +50,15 @@ class WeatherAPI: NSObject {
         }
     }
     
-    
+    func getIcon(name: String,  completion: @escaping (Data?)->(Void)) {
+        
+        let urlStr = "https://openweathermap.org/img/w/" + name + ".png"
+        let url = URL(string: urlStr)
+        if let url = url {
+            fetch(url:url , completion: completion)
+        }
+        
+    }
     
     func getForecastResultsFor(latitude: Double, longitude: Double) {
         
