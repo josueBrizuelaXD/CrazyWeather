@@ -52,7 +52,7 @@ struct WeatherSummary: Codable {
 
 class MainWeatherData: Codable {
     let temp: Double
-    let pressure: Int?
+    let pressure: Double?
     let humidity: Int?
     let tempMin: Double?
     let tempMax: Double?
@@ -68,7 +68,7 @@ class MainWeatherData: Codable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         temp = try container.decode(Double.self, forKey: .temp)
-        pressure = try container.decodeIfPresent(Int.self, forKey: .pressure)
+        pressure = try container.decodeIfPresent(Double.self, forKey: .pressure)
         humidity = try container.decodeIfPresent(Int.self, forKey: .humidity)
         tempMin = try container.decodeIfPresent(Double.self, forKey: .tempMin)
         tempMax = try container.decodeIfPresent(Double.self, forKey: .tempMax)

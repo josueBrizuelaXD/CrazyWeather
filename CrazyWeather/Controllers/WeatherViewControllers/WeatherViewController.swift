@@ -15,7 +15,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var summaryWeatherLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
-    
+    // TODO : Add Pull refresh
     let locationManager = CLLocationManager()
     private var token: NSKeyValueObservation?
     
@@ -128,7 +128,7 @@ class WeatherViewController: UIViewController {
                 
                 switch hour {
                 case 12...18:
-                    weatherImage = WeatherBackgrounds.afternoon
+                    weatherImage = WeatherBackgrounds.night
                 case 19...23:
                    weatherImage = WeatherBackgrounds.night
                 default:
