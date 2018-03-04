@@ -29,6 +29,8 @@ class WeatherViewController: UIViewController {
         case night = "night-landscape"
     }
     
+    
+    //MARK: - View Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +44,9 @@ class WeatherViewController: UIViewController {
             
         }
     }
+    
+    //MARK: - CoreLocation
+    
     func enableBasicLocationServices() {
         locationManager.delegate = self
         
@@ -106,7 +111,7 @@ class WeatherViewController: UIViewController {
     
     //MARK: - Helper Methods
     private func updateBackgroundWith(image: String, time: Int?) -> UIImage? {
-//    print("[JOSH] : image \(image)")
+
     var weatherImage : WeatherBackgrounds = WeatherBackgrounds.clear
     
     switch image {
@@ -145,15 +150,11 @@ class WeatherViewController: UIViewController {
     
     repeat {
         let randomInt = randomNumber(range: Range(1...3))
-//        print("[JOSH] randInt: \(randomInt)")
-//        print("[JOSH] weatherImage: \(weatherImage)")
-        let imageName = weatherImage.rawValue + "-\(randomInt)"
-//        print("[JOSH] imageName: \(imageName)")
-        
+     let imageName = weatherImage.rawValue + "-\(randomInt)"
+
         image = UIImage(named: imageName)
     } while image == nil
-    
-//    print("[JOSH] end: \(image)")
+
     return image
     }
     
@@ -179,6 +180,7 @@ class WeatherViewController: UIViewController {
     }
 }
 
+//MARK: - CLLocationManagerDelegate
 extension WeatherViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

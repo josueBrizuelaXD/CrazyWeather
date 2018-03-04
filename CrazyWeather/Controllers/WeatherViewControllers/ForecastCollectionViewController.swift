@@ -22,7 +22,7 @@ class ForecastViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
+       
         collectionView.dataSource = self
         
         token = WeatherAPI.shared.observe(\.forecast) {
@@ -70,10 +70,6 @@ class ForecastViewController: UIViewController {
         
         
     }
-}
-
-extension ForecastViewController: UICollectionViewDelegate {
-    
 }
 
 extension ForecastViewController: UICollectionViewDataSource {
