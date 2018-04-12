@@ -35,7 +35,7 @@ class WeatherTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         token = WeatherAPI.shared.observe(\.weather) {
             weatherAPI, _ in
             DispatchQueue.main.async {
@@ -46,17 +46,14 @@ class WeatherTableViewController: UITableViewController {
         
         forecastToken = WeatherAPI.shared.observe(\.forecast) {
             weatherAPI, v in
-//            print("[JOSH]: forecast property2 \(weatherAPI) and v2: \(v)")
+            
             if let list = weatherAPI.forecast?.list {
-               var dayForecastFrames = [ForecastFrame]()
+                var dayForecastFrames = [ForecastFrame]()
                 
                 let days = Int((Double(list.count) / 8.0).rounded())
-               
-                print("[JOSH] list: \(list.count)")
-                print("[JOSH] days: \(days)")
-      
+              
                 for i in 1...days {
-                   let dayIndex = i * 8
+                    let dayIndex = i * 8
                     
                     if dayIndex <= list.count - 1 {
                         let day = list[dayIndex]
@@ -66,8 +63,6 @@ class WeatherTableViewController: UITableViewController {
                         dayForecastFrames.append(list[list.count - 1])
                     }
                 }
-                
-                print("[JOSH] dayForecast array: \(dayForecastFrames.count)")
                 
                 for (i,frame) in dayForecastFrames.enumerated() {
                     WeatherAPI.shared.getIcon(name: frame.weather[0].icon, completion: {
@@ -93,7 +88,7 @@ class WeatherTableViewController: UITableViewController {
                                     weatherIcon.image = image
                                 }
                             }
-                           
+                            
                         }
                     })
                 }
@@ -115,7 +110,7 @@ class WeatherTableViewController: UITableViewController {
         sunsetLbl.text = dateFormatter.string(from: sunsetDate)
         
         if let pressure = weatherData.main.pressure {
-             pressureLbl.text = String(pressure)
+            pressureLbl.text = String(pressure)
         }
         
         if let humidity = weatherData.main.humidity {
@@ -138,9 +133,5 @@ class WeatherTableViewController: UITableViewController {
             minTempLbl.text = String(Int(minTemp.rounded())) + "º"
         }
         
-        
-       
-    }
-    
-  
+    } 
 }

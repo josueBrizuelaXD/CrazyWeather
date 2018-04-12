@@ -42,7 +42,7 @@ struct WeatherSummary: Codable {
     
     let main: String
     let summary: String
-   
+    
     enum CodingKeys: String, CodingKey {
         case main
         case summary = "description"

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="a1A-QX-Ycm">
             <objects>
-                <tabBarController id="R2U-Yr-MRs" customClass="TabViewController" customModule="CrazyWeather" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="R2U-Yr-MRs" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="czQ-4V-r33">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -125,6 +125,7 @@
                     <connections>
                         <outlet property="backgroundImage" destination="IEN-8w-3Ly" id="b75-a3-cdx"/>
                         <outlet property="cityLabel" destination="jEc-bX-Gg3" id="Yl0-2Z-zdy"/>
+                        <outlet property="scrollView" destination="FOR-vA-hzr" id="Znf-Pt-O3H"/>
                         <outlet property="summaryWeatherLabel" destination="ZCw-OT-m6O" id="dAR-mE-uHB"/>
                         <outlet property="tempLabel" destination="myG-x3-LXF" id="jQ1-5a-Nep"/>
                     </connections>
@@ -133,17 +134,17 @@
             </objects>
             <point key="canvasLocation" x="-471.19999999999999" y="520.83958020989508"/>
         </scene>
-        <!--Live-->
+        <!--Radar-->
         <scene sceneID="EfP-nM-Hna">
             <objects>
-                <viewController id="Q55-rr-OVO" customClass="MapViewController" customModule="CrazyWeather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Q55-rr-OVO" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VLV-2T-7Lp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="GVU-mF-9Uu"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Live" image="radar-icon" id="dHq-jL-aSQ"/>
+                    <tabBarItem key="tabBarItem" title="Radar" image="radar-icon" id="dHq-jL-aSQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vja-ne-sMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

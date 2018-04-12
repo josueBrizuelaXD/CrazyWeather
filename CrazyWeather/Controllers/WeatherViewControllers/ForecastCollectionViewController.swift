@@ -19,15 +19,14 @@ class ForecastViewController: UIViewController {
         let image: UIImage?
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         collectionView.dataSource = self
         
         token = WeatherAPI.shared.observe(\.forecast) {
             weatherAPI, v in
-//            print("[JOSH]: forecast property \(weatherAPI) and v: \(v)")
+            
             if let list = weatherAPI.forecast?.list {
                 var dayForecastFrames = [ForecastFrame]()
                 
@@ -43,11 +42,11 @@ class ForecastViewController: UIViewController {
                     WeatherAPI.shared.getIcon(name: frame.weather[0].icon, completion: {
                         data in
                         if let data = data {
-                          let image = UIImage(data: data)
+                            let image = UIImage(data: data)
                             let dayFrame = DayFrame(forecastFrame: frame, image: image)
                             self.dayFrames.append(dayFrame)
                             
-                           
+                            
                         } else {
                             let dayFrame = DayFrame(forecastFrame: frame, image: nil)
                             self.dayFrames.append(dayFrame)
@@ -56,19 +55,11 @@ class ForecastViewController: UIViewController {
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
                         }
-
+                        
                     })
                 }
-                
-                
-                
-                
             }
-            
         }
-        
-        
-        
     }
 }
 
@@ -82,8 +73,8 @@ extension ForecastViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dayFrameViewCell", for: indexPath) as! DayFrameCollectionViewCell
         
         let dayFrame = dayFrames[indexPath.row]
-       
-      
+        
+        
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")

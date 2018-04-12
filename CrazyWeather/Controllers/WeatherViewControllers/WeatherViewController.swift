@@ -11,17 +11,17 @@ import CoreLocation
 
 class WeatherViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var summaryWeatherLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
-    // TODO : Add Pull refresh
     let locationManager = CLLocationManager()
     private var token: NSKeyValueObservation?
     
     
     //weather-backgrounds
-  private enum WeatherBackgrounds: String {
+    private enum WeatherBackgrounds: String {
         case clear = "sunny-landscape"
         case snow = "snow-landscape"
         case rain = "rain-landscape"
@@ -34,12 +34,32 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Add a refreshControl to scrollview
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.white
+        refreshControl.addTarget(self, action: #selector(WeatherViewController.refreshContents), for: .valueChanged)
+        scrollView.refreshControl = refreshControl
+        
+        //add viewcontroller as the delegate of the locationManager
+        locationManager.delegate = self
+        
+        //request user authorization and enable location services
         enableBasicLocationServices()
+        
+        //Observe changes in the Weather property
         token = WeatherAPI.shared.observe(\.weather) {
             weatherAPI, v in
             
+            
+            //update UI
             DispatchQueue.main.async {
+                
+                //if there's a refresh control and is refreshing, stop it.
+                if let refreshControl = self.scrollView.refreshControl, refreshControl.isRefreshing {
+                    refreshControl.endRefreshing()
+                }
                 self.updateWeatherViewsWith(weatherData: weatherAPI.weather)
+                self.locationManager.stopMonitoringSignificantLocationChanges()
             }
             
         }
@@ -48,7 +68,6 @@ class WeatherViewController: UIViewController {
     //MARK: - CoreLocation
     
     func enableBasicLocationServices() {
-        locationManager.delegate = self
         
         switch CLLocationManager.authorizationStatus() {
         case .notDetermined:
@@ -62,10 +81,10 @@ class WeatherViewController: UIViewController {
             
         case .authorizedWhenInUse:
             // Enable location features
-             startReceivingSignificantLocationUpdates()
+            startReceivingSignificantLocationUpdates()
             break
         case .authorizedAlways:
-           
+            
             break
         }
     }
@@ -79,9 +98,6 @@ class WeatherViewController: UIViewController {
         locationManager.startMonitoringSignificantLocationChanges()
     }
     
-    
-    
-    
     //MARK: - Update UI Elements
     
     func updateWeatherViewsWith(weatherData: Weather?) {
@@ -93,9 +109,9 @@ class WeatherViewController: UIViewController {
         tempLabel.text = String(Int(weather.main.temp.rounded())) + "º"
         
         if let image = self.updateBackgroundWith(image: weather.weather[0].summary, time:weather.dt) {
-           
+            
             UIView.animate(withDuration: 0.8, delay: 0.0, options: [.curveEaseIn], animations: {
-                 self.backgroundImage.alpha = 0.0
+                self.backgroundImage.alpha = 0.0
                 
             }, completion: {
                 completed in
@@ -107,56 +123,68 @@ class WeatherViewController: UIViewController {
             })
             
         }
-       
+        
     }
     
     //MARK: - Helper Methods
-    private func updateBackgroundWith(image: String, time: Int?) -> UIImage? {
-
-    var weatherImage : WeatherBackgrounds = WeatherBackgrounds.clear
-    
-    switch image {
-    case "Snow":
-        weatherImage = WeatherBackgrounds.snow
-    case "Rain":
-        weatherImage = WeatherBackgrounds.rain
-    
-    default:
+    @objc private func refreshContents() {
+        //if we have a recent location use it to make a new request.
         
-        if let time = time {
-            let date = Date(timeIntervalSince1970: TimeInterval(time))
-            print("date \(date)")
-            let calendar = Calendar.current
-            let dateComponents = calendar.dateComponents([.hour], from: date)
+        if let location = locationManager.location {
+            let latitude = location.coordinate.latitude
+            let longitude = location.coordinate.longitude
             
-            if let hour = dateComponents.hour {
-                print("hour \(hour)")
-                
-                switch hour {
-                case 12...18:
-                    weatherImage = WeatherBackgrounds.night
-                case 19...23:
-                   weatherImage = WeatherBackgrounds.night
-                default:
-                    weatherImage = WeatherBackgrounds.clear
-                }
-                
-            }
+            WeatherAPI.shared.getWeatherResultsFor(latitude: latitude, longitude: longitude)
+            WeatherAPI.shared.getForecastResultsFor(latitude: latitude, longitude: longitude)
+            //else request new user location
+        } else {
+            enableBasicLocationServices()
         }
     }
     
     
-    
-    var image : UIImage? = nil
-    
-    repeat {
-        let randomInt = randomNumber(range: Range(1...3))
-     let imageName = weatherImage.rawValue + "-\(randomInt)"
-
-        image = UIImage(named: imageName)
-    } while image == nil
-
-    return image
+    private func updateBackgroundWith(image: String, time: Int?) -> UIImage? {
+        
+        var weatherImage : WeatherBackgrounds = WeatherBackgrounds.clear
+        
+        switch image {
+        case "Snow":
+            weatherImage = WeatherBackgrounds.snow
+        case "Rain":
+            weatherImage = WeatherBackgrounds.rain
+            
+        default:
+            
+            if let time = time {
+                let date = Date(timeIntervalSince1970: TimeInterval(time))
+                let calendar = Calendar.current
+                let dateComponents = calendar.dateComponents([.hour], from: date)
+                
+                if let hour = dateComponents.hour {
+                    
+                    switch hour {
+                    case 12...18:
+                        weatherImage = WeatherBackgrounds.night
+                    case 19...23:
+                        weatherImage = WeatherBackgrounds.night
+                    default:
+                        weatherImage = WeatherBackgrounds.clear
+                    }
+                    
+                }
+            }
+        }
+        
+        var image : UIImage? = nil
+        
+        repeat {
+            let randomInt = randomNumber(range: Range(1...3))
+            let imageName = weatherImage.rawValue + "-\(randomInt)"
+            
+            image = UIImage(named: imageName)
+        } while image == nil
+        
+        return image
     }
     
     func randomNumber(range: Range<UInt32>) -> Int {
@@ -196,10 +224,12 @@ extension WeatherViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //get user location
         let loc = locations[0]
         let latitude = Double(round(100 * loc.coordinate.latitude) / 100)
         let longitude = Double(round(100 * loc.coordinate.longitude) / 100)
         
+        //make request to weather service
         WeatherAPI.shared.getWeatherResultsFor(latitude: latitude, longitude: longitude)
         WeatherAPI.shared.getForecastResultsFor(latitude: latitude, longitude: longitude)
     }

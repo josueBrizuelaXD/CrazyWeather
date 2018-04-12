@@ -17,13 +17,13 @@ class WeatherAPI: NSObject {
     private enum API {
         
         case currentWeather
-        case weatherForecast
+        case currentForecast
         
         fileprivate func path() -> URLComponents {
             switch self {
             case .currentWeather:
                 return URLComponents(string:"\(WeatherAPI.basePath)weather")!
-            case .weatherForecast:
+            case .currentForecast:
                 return URLComponents(string:"\(WeatherAPI.basePath)forecast")!
             }
         }
@@ -38,10 +38,10 @@ class WeatherAPI: NSObject {
         
         fetch(url: url) {
             data in
-//            print("[JOSH] data: \(data!)")
+            //            print("[JOSH] data: \(data!)")
             do {
                 let weather = try JSONDecoder().decode(Weather.self, from:data!)
-//                print("[JOSH] weather: \(weather)")
+                //                print("[JOSH] weather: \(weather)")
                 self.weather =  weather
             } catch let error {
                 print("[JOSH] \(error)")
@@ -61,17 +61,16 @@ class WeatherAPI: NSObject {
     
     func getForecastResultsFor(latitude: Double, longitude: Double) {
         
-        var urlComponents = API.weatherForecast.path()
+        var urlComponents = API.currentForecast.path()
         urlComponents.query = "lat=\(latitude)&lon=\(longitude)&appid=\(SecretKeys.weatherKey)&units=imperial"
         guard let url = urlComponents.url else { return }
-//        print("[JOSH] url: \(url)")
+        
         
         fetch(url: url) {
             data in
-//            print("[JOSH] data: \(data!)")
+            
             do {
                 let forecast = try JSONDecoder().decode(Forecast.self, from:data!)
-//                print("[JOSH] forecast: \(forecast)")
                 self.forecast =  forecast
             } catch let error {
                 print("[JOSH] \(error)")
@@ -83,11 +82,8 @@ class WeatherAPI: NSObject {
     func fetch(url: URL, completion: @escaping (Data?) -> Void) {
         let defaultSession = URLSession(configuration: .default)
         
-        
         let dataTask = defaultSession.dataTask(with: url) {
             data, response, error in
-            
-            print("current Thread: \(Thread.current)")
             
             guard let data = data, error == nil else { return }
             completion(data)
