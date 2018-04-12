@@ -62,9 +62,10 @@ class WeatherViewController: UIViewController {
             
         case .authorizedWhenInUse:
             // Enable location features
+             startReceivingSignificantLocationUpdates()
             break
         case .authorizedAlways:
-            startReceivingSignificantLocationUpdates()
+           
             break
         }
     }

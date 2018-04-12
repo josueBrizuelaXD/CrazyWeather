@@ -11,7 +11,6 @@ import Foundation
 class WeatherAPI: NSObject {
     static let shared = WeatherAPI ()
     private static let basePath = "https://api.openweathermap.org/data/2.5/"
-    private static let apiKey = "082e6533e8dc5235d377971b22a93ce5"
     @objc dynamic private(set) var weather: Weather?
     @objc dynamic private(set) var forecast: Forecast?
     
@@ -33,7 +32,7 @@ class WeatherAPI: NSObject {
     func getWeatherResultsFor(latitude: Double, longitude: Double) {
         
         var urlComponents = API.currentWeather.path()
-        urlComponents.query = "lat=\(latitude)&lon=\(longitude)&appid=\(WeatherAPI.apiKey)&units=imperial"
+        urlComponents.query = "lat=\(latitude)&lon=\(longitude)&appid=\(SecretKeys.weatherKey)&units=imperial"
         guard let url = urlComponents.url else { return }
         print("[JOSH] url: \(url)")
         
@@ -63,7 +62,7 @@ class WeatherAPI: NSObject {
     func getForecastResultsFor(latitude: Double, longitude: Double) {
         
         var urlComponents = API.weatherForecast.path()
-        urlComponents.query = "lat=\(latitude)&lon=\(longitude)&appid=\(WeatherAPI.apiKey)&units=imperial"
+        urlComponents.query = "lat=\(latitude)&lon=\(longitude)&appid=\(SecretKeys.weatherKey)&units=imperial"
         guard let url = urlComponents.url else { return }
 //        print("[JOSH] url: \(url)")
         
@@ -87,6 +86,8 @@ class WeatherAPI: NSObject {
         
         let dataTask = defaultSession.dataTask(with: url) {
             data, response, error in
+            
+            print("current Thread: \(Thread.current)")
             
             guard let data = data, error == nil else { return }
             completion(data)
