@@ -15,7 +15,9 @@
 		034F233C1F9AD546003B0401 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034F233B1F9AD546003B0401 /* Forecast.swift */; };
 		034F233F1F9AD848003B0401 /* DayFrameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034F233E1F9AD848003B0401 /* DayFrameCollectionViewCell.swift */; };
 		03A2C1E61F8EE1CD003875E7 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A2C1E51F8EE1CD003875E7 /* WeatherViewController.swift */; };
+		03A5434D2087FB7000874445 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A5434C2087FB7000874445 /* LocationManager.swift */; };
 		03CB541A207FB9BA006659EF /* SecretKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CB5419207FB9BA006659EF /* SecretKeys.swift */; };
+		03CB541C207FF4AC006659EF /* RadarMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CB541B207FF4AC006659EF /* RadarMapViewController.swift */; };
 		03CFABCB1FC73E70000C069D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CFABCA1FC73E70000C069D /* Weather.swift */; };
 		03FABD2B1F958DCD008C226E /* ForecastCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FABD2A1F958DCD008C226E /* ForecastCollectionViewController.swift */; };
 		03FF9D691FC5D593001628BB /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FF9D681FC5D593001628BB /* WeatherAPI.swift */; };
@@ -34,7 +36,9 @@
 		034F233E1F9AD848003B0401 /* DayFrameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFrameCollectionViewCell.swift; sourceTree = "<group>"; };
 		039335ED1F887B3D0083E962 /* CrazyWeather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrazyWeather-Bridging-Header.h"; sourceTree = "<group>"; };
 		03A2C1E51F8EE1CD003875E7 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		03A5434C2087FB7000874445 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		03CB5419207FB9BA006659EF /* SecretKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretKeys.swift; sourceTree = "<group>"; };
+		03CB541B207FF4AC006659EF /* RadarMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarMapViewController.swift; sourceTree = "<group>"; };
 		03CFABCA1FC73E70000C069D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		03FABD2A1F958DCD008C226E /* ForecastCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCollectionViewController.swift; sourceTree = "<group>"; };
 		03FF9D681FC5D593001628BB /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
@@ -76,10 +80,10 @@
 		031F09D31F87060F003099C1 /* CrazyWeather */ = {
 			isa = PBXGroup;
 			children = (
+				03A5434A2087FB3200874445 /* Services */,
 				03CFABC91FC72DB9000C069D /* Other */,
 				03CFABC81FC72DA8000C069D /* Storyboards */,
 				03CFABC51FC72D64000C069D /* Assets */,
-				03CFABC71FC72D95000C069D /* Networking */,
 				034F233D1F9AD800003B0401 /* Views */,
 				034F233A1F9AD4BE003B0401 /* Models */,
 				0332B3111F8DCF7B00146829 /* Controllers */,
@@ -91,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				03FF9D6A1FC5E2B5001628BB /* WeatherViewControllers */,
+				03CB541B207FF4AC006659EF /* RadarMapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -110,6 +115,23 @@
 				034F233E1F9AD848003B0401 /* DayFrameCollectionViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		03A5434A2087FB3200874445 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				03A5434B2087FB4700874445 /* Location */,
+				03CFABC71FC72D95000C069D /* Networking */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		03A5434B2087FB4700874445 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				03A5434C2087FB7000874445 /* LocationManager.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 		03CFABC51FC72D64000C069D /* Assets */ = {
@@ -187,7 +209,7 @@
 				031F09CE1F87060F003099C1 /* Frameworks */,
 				031F09CF1F87060F003099C1 /* Resources */,
 				6BF6BE8775B3287BF394B751 /* [CP] Embed Pods Frameworks */,
-				1950025E8DB75F3C583E73F1 /* [CP] Copy Pods Resources */,
+				83839BCDC02BCA552CAC5A6C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,7 +227,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = josuebrizuela;
 				TargetAttributes = {
 					031F09D01F87060F003099C1 = {
@@ -247,25 +269,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1950025E8DB75F3C583E73F1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/AerisWeather/Aeris.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/AerisWeather/AerisUI.bundle,
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4A00FF767D3AE017039AC171 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -292,16 +295,36 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/MBXMapKit/MBXMapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBXMapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83839BCDC02BCA552CAC5A6C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/AerisWeather/Aeris.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/AerisWeather/AerisUI.bundle",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Aeris.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AerisUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CrazyWeather/Pods-CrazyWeather-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -314,6 +337,8 @@
 				03FABD2B1F958DCD008C226E /* ForecastCollectionViewController.swift in Sources */,
 				034F233C1F9AD546003B0401 /* Forecast.swift in Sources */,
 				03A2C1E61F8EE1CD003875E7 /* WeatherViewController.swift in Sources */,
+				03A5434D2087FB7000874445 /* LocationManager.swift in Sources */,
+				03CB541C207FF4AC006659EF /* RadarMapViewController.swift in Sources */,
 				03CFABCB1FC73E70000C069D /* Weather.swift in Sources */,
 				034B7C181FB410A9004AED92 /* WeatherTableViewController.swift in Sources */,
 				034F233F1F9AD848003B0401 /* DayFrameCollectionViewCell.swift in Sources */,
@@ -359,6 +384,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -366,6 +392,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -417,6 +444,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -424,6 +452,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

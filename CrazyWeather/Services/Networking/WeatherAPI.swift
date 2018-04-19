@@ -38,10 +38,10 @@ class WeatherAPI: NSObject {
         
         fetch(url: url) {
             data in
-            //            print("[JOSH] data: \(data!)")
+            
             do {
                 let weather = try JSONDecoder().decode(Weather.self, from:data!)
-                //                print("[JOSH] weather: \(weather)")
+                // print("[JOSH] weather: \(weather)")
                 self.weather =  weather
             } catch let error {
                 print("[JOSH] \(error)")
@@ -56,7 +56,6 @@ class WeatherAPI: NSObject {
         if let url = url {
             fetch(url:url , completion: completion)
         }
-        
     }
     
     func getForecastResultsFor(latitude: Double, longitude: Double) {
@@ -64,7 +63,6 @@ class WeatherAPI: NSObject {
         var urlComponents = API.currentForecast.path()
         urlComponents.query = "lat=\(latitude)&lon=\(longitude)&appid=\(SecretKeys.weatherKey)&units=imperial"
         guard let url = urlComponents.url else { return }
-        
         
         fetch(url: url) {
             data in
@@ -110,6 +108,5 @@ class WeatherAPI: NSObject {
         
         return nil
     }
-    
 }
 

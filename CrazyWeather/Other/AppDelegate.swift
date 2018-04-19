@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import Aeris
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       
+        //start aeries engine
+        AerisEngine.engine(withKey: SecretKeys.aerisAccessIDKey, secret: SecretKeys.aerisSecretKey)
+        AerisEngine.enableDebug()
+        
+        //start google maps
+        GMSServices.provideAPIKey(SecretKeys.googleMaps)
         return true
     }
 }

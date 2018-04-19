@@ -137,7 +137,7 @@
         <!--Radar-->
         <scene sceneID="EfP-nM-Hna">
             <objects>
-                <viewController id="Q55-rr-OVO" sceneMemberID="viewController">
+                <viewController id="Q55-rr-OVO" customClass="RadarMapViewController" customModule="CrazyWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VLV-2T-7Lp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
