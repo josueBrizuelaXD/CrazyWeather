@@ -9,6 +9,8 @@
 import UIKit
 
 class DayFrameCollectionViewCell: UICollectionViewCell {
+    
+    //MARK: - IBOutlets
     @IBOutlet weak var timeFrameLabel: UILabel!
     @IBOutlet weak var timeFrameImage: UIImageView!
     @IBOutlet weak var timeFramePrecipitationLabel: UILabel!

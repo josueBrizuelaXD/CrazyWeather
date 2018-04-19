@@ -9,6 +9,8 @@
 import UIKit
 
 class WeatherTableViewController: UITableViewController {
+    
+    //MARK: - IBOutlets
     @IBOutlet weak var sunriseLbl: UILabel!
     @IBOutlet weak var sunsetLbl: UILabel!
     @IBOutlet weak var pressureLbl: UILabel!
@@ -23,7 +25,7 @@ class WeatherTableViewController: UITableViewController {
     @IBOutlet var weatherIcons: [UIImageView]!
     
     
-    
+    //MARK: - Properties
     private var token: NSKeyValueObservation?
     private var forecastToken: NSKeyValueObservation?
     private var weekDays = [DayFrame]()
@@ -33,6 +35,8 @@ class WeatherTableViewController: UITableViewController {
         let image: UIImage?
     }
     
+    
+    //MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -98,6 +102,7 @@ class WeatherTableViewController: UITableViewController {
         }
     }
     
+    //MARK: - Helper methods
     func updateWeatherViewssWith(weatherData: Weather?) {
         guard let weatherData = weatherData else { return }
         

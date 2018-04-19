@@ -10,14 +10,19 @@ import UIKit
 
 
 class ForecastViewController: UIViewController {
+    
+    //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     private var token: NSKeyValueObservation?
     private var dayFrames = [DayFrame]()
     
+   
     private struct DayFrame {
         let forecastFrame : ForecastFrame
         let image: UIImage?
     }
+    
+    //MARK: - View life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +68,7 @@ class ForecastViewController: UIViewController {
     }
 }
 
+//MARK: - CollectionViewDataSource
 extension ForecastViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -70,11 +76,10 @@ extension ForecastViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dayFrameViewCell", for: indexPath) as! DayFrameCollectionViewCell
         
         let dayFrame = dayFrames[indexPath.row]
-        
-        
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")

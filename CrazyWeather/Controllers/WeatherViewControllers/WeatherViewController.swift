@@ -16,9 +16,8 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var summaryWeatherLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
-    let locationManager = CLLocationManager()
     private var token: NSKeyValueObservation?
-    
+    private var locationToken : NSKeyValueObservation?
     
     //weather-backgrounds
     private enum WeatherBackgrounds: String {
@@ -34,17 +33,21 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //request user authorization and enable location services
+        LocationManager.shared.enableBasicLocationServices()
+        
         //Add a refreshControl to scrollview
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.white
         refreshControl.addTarget(self, action: #selector(WeatherViewController.refreshContents), for: .valueChanged)
         scrollView.refreshControl = refreshControl
         
-        //add viewcontroller as the delegate of the locationManager
-        locationManager.delegate = self
-        
-        //request user authorization and enable location services
-        enableBasicLocationServices()
+        //Observe changes in the location property
+        locationToken = LocationManager.shared.observe(\.location) {
+            locationManager , _ in
+//            print("locationM: \(locationManager.location)")
+           
+        }
         
         //Observe changes in the Weather property
         token = WeatherAPI.shared.observe(\.weather) {
@@ -59,45 +62,13 @@ class WeatherViewController: UIViewController {
                     refreshControl.endRefreshing()
                 }
                 self.updateWeatherViewsWith(weatherData: weatherAPI.weather)
-                self.locationManager.stopMonitoringSignificantLocationChanges()
+//                self.locationManager.stopMonitoringSignificantLocationChanges()
             }
             
         }
     }
     
-    //MARK: - CoreLocation
-    
-    func enableBasicLocationServices() {
         
-        switch CLLocationManager.authorizationStatus() {
-        case .notDetermined:
-            // Request when-in-use authorization initially
-            locationManager.requestWhenInUseAuthorization()
-            break
-            
-        case .restricted, .denied:
-            // Disable location features
-            break
-            
-        case .authorizedWhenInUse:
-            // Enable location features
-            startReceivingSignificantLocationUpdates()
-            break
-        case .authorizedAlways:
-            
-            break
-        }
-    }
-    
-    func startReceivingSignificantLocationUpdates() {
-        if !CLLocationManager.significantLocationChangeMonitoringAvailable() {
-            print("significant locations services not enabled")
-            return
-        }
-        
-        locationManager.startMonitoringSignificantLocationChanges()
-    }
-    
     //MARK: - Update UI Elements
     
     func updateWeatherViewsWith(weatherData: Weather?) {
@@ -128,18 +99,7 @@ class WeatherViewController: UIViewController {
     
     //MARK: - Helper Methods
     @objc private func refreshContents() {
-        //if we have a recent location use it to make a new request.
-        
-        if let location = locationManager.location {
-            let latitude = location.coordinate.latitude
-            let longitude = location.coordinate.longitude
-            
-            WeatherAPI.shared.getWeatherResultsFor(latitude: latitude, longitude: longitude)
-            WeatherAPI.shared.getForecastResultsFor(latitude: latitude, longitude: longitude)
-            //else request new user location
-        } else {
-            enableBasicLocationServices()
-        }
+        LocationManager.shared.requestNewLocation()
     }
     
     
@@ -208,34 +168,3 @@ class WeatherViewController: UIViewController {
         return newString
     }
 }
-
-//MARK: - CLLocationManagerDelegate
-extension WeatherViewController: CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedWhenInUse:
-            locationManager.requestAlwaysAuthorization()
-        case .authorizedAlways:
-            startReceivingSignificantLocationUpdates()
-        default:
-            break
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //get user location
-        let loc = locations[0]
-        let latitude = Double(round(100 * loc.coordinate.latitude) / 100)
-        let longitude = Double(round(100 * loc.coordinate.longitude) / 100)
-        
-        //make request to weather service
-        WeatherAPI.shared.getWeatherResultsFor(latitude: latitude, longitude: longitude)
-        WeatherAPI.shared.getForecastResultsFor(latitude: latitude, longitude: longitude)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("[JOSH] error: \(error)")
-    }
-}
-
